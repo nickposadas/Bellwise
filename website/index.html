@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A human-led hotel intelligence platform for department reporting, AI review, and executive decision support.">
+  <title>Bellwise | Hotel Intelligence</title>
+  <link rel="stylesheet" href="bellwise.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23294D40'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-weight='700' font-size='34' fill='%23F7F6F2' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Primary navigation" id="sidebar">
+      <div class="brand"><div class="mark">B</div><div><strong>Bellwise</strong><small>Hotel Intelligence</small></div></div>
+      <nav class="nav">
+        <button class="active" data-page="overview" aria-current="page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg><span>Executive overview</span></button>
+        <button data-page="reports"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"></path><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M9 13h6M9 17h6M9 9h1"></path></svg><span>Department reports</span></button>
+        <button data-page="frontdesk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"></path><path d="M9 21v-6h6v6"></path><path d="M3 12h18"></path></svg><span>Front Desk</span></button>
+        <button data-page="fb"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7a4 4 0 0 0 4 4v9M7 2v11M11 2v11M17 2c-2 3-2 6 0 9v11"></path></svg><span>Food &amp; Beverage</span></button>
+        <button data-page="housekeeping"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9v11h14V9"></path><path d="M9 20v-6h6v6"></path></svg><span>Housekeeping</span></button>
+        <button data-page="approvals"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg><span>Approval queue</span></button>
+        <button data-page="audit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3M11 8v3l2 2"></path></svg><span>Audit history</span></button>
+      </nav>
+      <p class="sidebar-note">AI reviews and connects the work. Leaders keep approval, override, and accountability.</p>
+    </aside>
+    <div class="nav-overlay" id="navOverlay" hidden></div>
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+          <span class="property">Harborview Hotel Group</span>
+          <button class="demo-toggle" id="demoInfoToggle" aria-haspopup="dialog">Demo mode</button>
+        </div>
+        <label class="role-wrap">Viewing as <select id="roleSelect" aria-label="Executive role"><option value="gm">General Manager</option><option value="vp">Vice President</option><option value="cfo">Chief Financial Officer</option></select></label>
+      </header>
+      <div class="content"></div>
+    </main>
+  </div>
+
+  <dialog id="reportDialog" aria-labelledby="reportTitle"><div class="modal-head"><div><h2 id="reportTitle">Department report</h2><p id="reportOwner"></p></div><button class="close" data-close aria-label="Close">×</button></div><div class="modal-body" id="reportBody"></div></dialog>
+
+  <dialog id="createDialog" aria-labelledby="createTitle">
+    <form id="reportForm">
+      <div class="modal-head"><div><h2 id="createTitle">Create department report</h2><p>The department leader owns the ideas and final submission.</p></div><button class="close" type="button" data-close aria-label="Close">×</button></div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-field"><label for="deptInput">Department</label><select id="deptInput" required></select></div>
+          <div class="form-field"><label for="analysisInput">Leader's analysis</label><textarea id="analysisInput" required placeholder="Add the department leader's findings, experience, and ideas..."></textarea></div>
+          <div class="form-field"><label for="actionInput">Recommended action</label><input id="actionInput" required placeholder="What should leadership consider?"></div>
+        </div>
+        <div class="modal-actions"><button type="button" class="btn btn-secondary" data-close>Cancel</button><button type="submit" class="btn btn-primary">Submit report</button></div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="overrideDialog" aria-labelledby="overrideTitle">
+    <form id="overrideForm">
+      <div class="modal-head"><div><h2 id="overrideTitle">Override recommendation</h2><p>Human judgment takes priority and becomes part of the audit trail.</p></div><button class="close" type="button" data-close aria-label="Close">×</button></div>
+      <div class="modal-body">
+        <div class="form-grid"><div class="form-field"><label for="overrideReason">Reason for override</label><textarea id="overrideReason" required placeholder="Explain the context the AI may have missed..."></textarea></div></div>
+        <div class="modal-actions"><button type="button" class="btn btn-secondary" data-close>Cancel</button><button type="submit" class="btn btn-primary">Confirm override</button></div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="revisionDialog" aria-labelledby="revisionTitle">
+    <form id="revisionForm">
+      <div class="modal-head"><div><h2 id="revisionTitle">Return for revision</h2><p>Send this back to the department with what needs to change.</p></div><button class="close" type="button" data-close aria-label="Close">×</button></div>
+      <div class="modal-body">
+        <div class="form-grid"><div class="form-field"><label for="revisionReason">What needs to change</label><textarea id="revisionReason" required placeholder="Be specific about what the department should revisit..."></textarea></div></div>
+        <div class="modal-actions"><button type="button" class="btn btn-secondary" data-close>Cancel</button><button type="submit" class="btn btn-primary">Return for revision</button></div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="demoDialog" aria-labelledby="demoTitle">
+    <div class="modal-head"><div><h2 id="demoTitle">About this demo</h2></div><button class="close" type="button" data-close aria-label="Close">×</button></div>
+    <div class="modal-body">
+      <p>This is sample hotel data. AI review is simulated by templates in this browser — no live PMS, POS, or AI model is connected. The role selector changes what you see; it is not a security or permission control.</p>
+      <p>Changes you make are saved to this browser's local storage only, so refreshing keeps your work. This is not a shared or production database — nothing here is visible to any other user or device, and closing your browser's private-data settings will clear it.</p>
+      <div class="modal-actions"><button class="btn btn-secondary" id="resetDemo">Reset demo data</button><button class="btn btn-primary" data-close>Close</button></div>
+    </div>
+  </dialog>
+
+  <dialog id="resetDialog" aria-labelledby="resetTitle">
+    <div class="modal-head"><div><h2 id="resetTitle">Reset demo data?</h2></div><button class="close" type="button" data-close aria-label="Close">×</button></div>
+    <div class="modal-body">
+      <p>This clears every report, task, room change, guest request, and audit entry you've created in this browser, and restores the original sample data. This cannot be undone.</p>
+      <div class="modal-actions"><button class="btn btn-secondary" data-close>Cancel</button><button class="btn btn-danger" id="confirmReset">Reset demo data</button></div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="bellwise.js"></script>
+</body>
+</html>
