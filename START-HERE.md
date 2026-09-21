@@ -112,6 +112,6 @@ Future backend: reject malformed imports; prevent cross-hotel or unauthorized da
 
 ## Handoff boundaries
 
-The founder met Ari Balogh and took advice emphasizing removing unnecessary work, strong customer understanding, productive disagreement, and open-weight models with high-quality data. This is product inspiration, not an endorsement or verified performance claim. No contract, revenue, valuation, or enterprise partnership is established in this package. Focus on showing actual prototype behavior and the proposed next implementation honestly.
+Some early product thinking here was shaped by general startup advice about removing unnecessary work, strong customer understanding, productive disagreement, and open-weight models with high-quality data. No contract, revenue, valuation, or enterprise partnership is established in this package. Focus on showing actual prototype behavior and the proposed next implementation honestly.
 
 The existing source passed JavaScript syntax and diff checks when published. It has not undergone comprehensive browser, accessibility, security, or production-readiness testing. Run those checks as development advances. This export itself does not send files to Claude or create a GitHub repository.
