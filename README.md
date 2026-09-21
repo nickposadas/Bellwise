@@ -14,15 +14,15 @@ Bellwise is a working hotel-operations platform prototype designed to connect de
 
 I built Bellwise to explore how AI-assisted workflows could improve hotel operations without removing human oversight from important decisions.
 
-Hotel operations rely on multiple departments — such as Front Desk, Housekeeping, Food & Beverage, and management — sharing information quickly and consistently. I wanted to create a proof of concept that shows how a centralized platform could organize departmental reporting, flag issues, support approval workflows, and give leadership a clearer view of daily operations.
+The goal was not to build a production-ready hotel management system, but to test the business concept, workflow design, and user experience behind an AI-assisted operational platform — end to end, from the initial idea through a working prototype.
 
-The goal of the project was not to build a production-ready hotel management system, but to test the business concept, workflow design, and user experience behind an AI-assisted operational platform.
-
-I developed the concept, workflow structure, interface, and working prototype as a hands-on way to explore how software, data, and AI could be applied to real operational problems.
+I developed the concept, workflow structure, interface, and prototype myself as a hands-on way to explore how software, data, and AI could be applied to a real operational problem.
 
 ## Business Problem
 
-Hotel operations involve multiple departments that must constantly exchange information, respond to issues, and report operational performance to management. When these workflows are fragmented across separate systems, spreadsheets, messages, and manual processes, important information can be delayed or overlooked.
+Hotel operations rely on multiple departments — Front Desk, Housekeeping, Food & Beverage, marketing, and finance — that must constantly exchange information, respond to issues, and report operational performance to management. When these workflows are fragmented across separate systems, spreadsheets, messages, and manual processes, important information can be delayed or overlooked.
+
+This kind of fragmentation is most acute for operators managing multiple departments or multiple properties — hotel chains and hotel management companies — rather than a single small property where one person already sees everything.
 
 Bellwise explores how a centralized operational platform could organize these workflows, improve visibility across departments, and use AI-assisted review to identify issues while keeping employees and managers responsible for final decisions.
 
@@ -139,14 +139,16 @@ website/
 
 There is no build step, no required dependencies, no package installation, and no server-side code in the current prototype.
 
+Color tokens were checked against WCAG contrast requirements rather than assumed, and the interface supports keyboard navigation, visible focus states, and reduced-motion preferences. Details and the full rationale are in [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md).
+
 ## Current Limitations
 
 Bellwise is currently a product prototype rather than a production hotel-management platform.
 
 The current version does not include:
 
-- Live PMS integration
-- Live POS integration
+- Live PMS (property management system) integration
+- Live POS (point of sale) integration
 - Production authentication
 - Production backend services
 - Multi-user synchronization
